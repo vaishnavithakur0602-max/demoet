@@ -1,0 +1,198 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #050a0d;
+  --bg-panel: #07111a;
+  --cyan: #22d3ee;
+  --cyan-dim: #0e7490;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --grid: rgba(34, 211, 238, 0.06);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: #d1f5ff;
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: -1px -1px;
+}
+
+.font-mono {
+  font-family: "JetBrains Mono", "Fira Code", "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* Corner-bracket panel */
+.bracket-panel {
+  position: relative;
+}
+.bracket-panel::before,
+.bracket-panel::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--cyan);
+  border-style: solid;
+  pointer-events: none;
+}
+.bracket-panel::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1px 0 0 1px;
+}
+.bracket-panel::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 1px 1px 0;
+}
+.bracket-panel-amber::before,
+.bracket-panel-amber::after {
+  border-color: var(--amber);
+}
+
+/* All four corners variant */
+.bracket-4 {
+  position: relative;
+}
+.bracket-4 > .b {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--cyan);
+  border-style: solid;
+  pointer-events: none;
+}
+.bracket-4 > .b.tl { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.bracket-4 > .b.tr { top: -1px; right: -1px; border-width: 1px 1px 0 0; }
+.bracket-4 > .b.bl { bottom: -1px; left: -1px; border-width: 0 0 1px 1px; }
+.bracket-4 > .b.br { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+
+.label-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 10px;
+  font-weight: 600;
+  color: #67e8f9;
+}
+
+.label-eyebrow-dim {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 10px;
+  font-weight: 500;
+  color: #64748b;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(7, 17, 26, 0.4);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(34, 211, 238, 0.25);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 211, 238, 0.45);
+}
+
+/* Pulse animation for live indicators */
+@keyframes pulse-cyan {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.6); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(34, 211, 238, 0); }
+}
+.pulse-cyan {
+  animation: pulse-cyan 2s infinite;
+}
+
+@keyframes pulse-red {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+}
+.pulse-red {
+  animation: pulse-red 1.4s infinite;
+}
+
+@keyframes pulse-amber {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
+}
+.pulse-amber {
+  animation: pulse-amber 1.8s infinite;
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* Range slider styling */
+input[type="range"].scenario-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: linear-gradient(90deg, var(--cyan) 0%, var(--amber) 70%, var(--red) 100%);
+  border-radius: 2px;
+  outline: none;
+}
+input[type="range"].scenario-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #050a0d;
+  border: 2px solid var(--cyan);
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(34, 211, 238, 0.6);
+}
+input[type="range"].scenario-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #050a0d;
+  border: 2px solid var(--cyan);
+  cursor: pointer;
+}
+
+/* Voice mic pulse */
+@keyframes mic-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.5); }
+  50% { box-shadow: 0 0 0 14px rgba(34, 211, 238, 0); }
+}
+.mic-active {
+  animation: mic-pulse 1.5s infinite;
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
